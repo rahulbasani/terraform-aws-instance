@@ -1,9 +1,10 @@
 resource "aws_instance" "tf_instance" {
-  ami = var.ami_id
+  ami = local.temp_ami
   instance_type = var.instance_type
-  availability_zone = var.availability_zone
-  subnet_id = var.subnet_id
-  vpc_security_group_ids = var.security_group_ids
+  availability_zone = var.az
+  subnet_id = local.temp_subnet
+  associate_public_ip_address = var.publicIp
+  vpc_security_group_ids = []
   key_name = var.key_name
 
   tags = var.instance_tags
@@ -20,3 +21,22 @@ resource "aws_instance" "tf_instance" {
     }
   }
 }
+
+# resource "aws_ebs_volume" "volume" {
+#   availability_zone = var.az
+#   size = var.disk_size
+#   encrypted = var.disk_encrypt
+#   iops = var.disk_iops
+#   type = var.disk_type
+
+#   tags = merge(var.disk_tags,
+#     {"Device Name" = var.device_name}
+#   )
+# }
+
+# resource "aws_volume_attachment" "attach_volume" {
+#   for_each = aws_ebs_volume.volume
+#   device_name = 
+#   volume_id = each.volume_id
+#   instance_id = aws_instance.tf_instance
+# }

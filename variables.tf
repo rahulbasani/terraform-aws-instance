@@ -1,9 +1,19 @@
+variable "region" {
+  type = string
+  default = "ap-south-1"
+}
 variable "ami_id" {
   type = string
+  default = ""
 }
 
+variable "platform" {
+  type = string
+  default = ""
+}
 variable "instance_type" {
   type = string
+  default = "t2.micro"
 }
 
 variable "subnet_id" {
@@ -11,9 +21,14 @@ variable "subnet_id" {
   default = ""
 }
 
-variable "availability_zone" {
+variable "az" {
   type = string
-  default = ""
+  default = "ap-south-1a"
+}
+
+variable "publicIp" {
+  type = bool
+  default = false
 }
 
 variable "key_name" {
@@ -31,6 +46,8 @@ variable "instance_tags" {
   default = {
   }
 }
+
+// root volume details
 variable "configure_root_device" {
   type = bool
   default = false
@@ -61,3 +78,32 @@ variable "root_volume_tags" {
   default = {
   }
 }
+
+// ebs volume details
+
+# variable "disk_size" {
+#   type = number
+# }
+
+# variable "disk_encrypt" {
+#   type = bool
+#   default = true
+# }
+
+# variable "disk_iops" {
+#   type = number
+# }
+
+# variable "disk_type" {
+#   type = string
+#   default = "gp3"
+# }
+
+# variable "disk_tags" {
+#   type = map(string)
+# }
+
+# variable "device_name" {
+#   type = string
+# }
+
